@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-arabic: "Cairo", "Inter", sans-serif;
+  
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@layer utilities {
+  /* Dynamic custom scrollbar styled beautifully for slate UI */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(120, 119, 125, 0.2);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(120, 119, 125, 0.4);
+  }
+
+  /* 光栅/百叶窗式切换（用于作品照片切换） */
+  .raster-wipe {
+    pointer-events: none;
+    will-change: opacity, -webkit-mask-position, mask-position;
+    transform: translateZ(0);
+
+    /* 竖向条纹遮罩：像“光栅”一样分段显示 */
+    -webkit-mask-image: repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0px,
+      rgba(0, 0, 0, 1) 10px,
+      rgba(0, 0, 0, 0.35) 10px,
+      rgba(0, 0, 0, 0) 16px
+    );
+    mask-image: repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0px,
+      rgba(0, 0, 0, 1) 10px,
+      rgba(0, 0, 0, 0.35) 10px,
+      rgba(0, 0, 0, 0) 16px
+    );
+    -webkit-mask-size: 16px 100%;
+    mask-size: 16px 100%;
+
+    animation-name: raster-wipe-out;
+    animation-duration: var(--raster-duration, 1100ms);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes raster-wipe-out {
+  0% {
+    opacity: 1;
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  100% {
+    opacity: 0;
+    /* 位移与时长同步：让光栅“扫过”更慢、更一致 */
+    -webkit-mask-position: 240px 0;
+    mask-position: 240px 0;
+  }
+}

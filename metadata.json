@@ -1,0 +1,6 @@
+{
+  "name": "Aesthetic Portfolio Template",
+  "description": "A highly refined, interactive personal portfolio template inspired by the minimalist typography and sleek design of baicheramy.com, featuring local timezone tracking and a live contents builder.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
